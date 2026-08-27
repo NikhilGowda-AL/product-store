@@ -1,3 +1,5 @@
+import Modal from "./components/Modal";
+
 export default function App() {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
@@ -8,6 +10,7 @@ export default function App() {
         <p className="mt-3 text-slate-600">
           Your product store is ready.
         </p>
+        <Modal/>
       </div>
     </div>
   )
