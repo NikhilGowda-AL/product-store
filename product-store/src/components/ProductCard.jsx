@@ -74,6 +74,20 @@ export default function ProductCard({ product, onAddToCart }) {
           Add to cart
         </button>
       </div>
+      <div className="absolute inset-x-0 bottom-0 translate-y-full bg-white/95 p-3 transition-transform duration-200 group-hover:translate-y-0">
+  <button
+    type="button"
+    onClick={(event) => {
+      event.preventDefault()
+      event.stopPropagation()
+      onAddToCart(product)
+    }}
+    className="flex min-h-10 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800"
+  >
+    <ShoppingCart size={17} />
+    Quick add
+  </button>
+</div>
     </article>
   )
 }
