@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom"
 import { ShoppingCart, Star } from "lucide-react"
+import {
+  formatPrice,
+  getDiscountedPrice,
+  toTitleCase
+} from "../utils/format"
 
 export default function ProductCard({ product, onAddToCart }) {
+  const discountedPrice = getDiscountedPrice(product)
+
   return (
-    <article className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+    <article className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
       <Link to={`/products/${product.id}`} className="block">
-        <div className="relative">
+        <div className="relative overflow-hidden">
           <img
             src={product.thumbnail}
             alt={product.title}
-            className="h-52 w-full object-cover"
+            className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
 
           {product.discountPercentage > 10 && (
@@ -20,18 +27,30 @@ export default function ProductCard({ product, onAddToCart }) {
         </div>
 
         <div className="p-4">
-          <h2 className="truncate font-semibold text-slate-900">
+          <h2 className="truncate font-semibold text-slate-900 transition-colors duration-200 group-hover:text-teal-700">
             {product.title}
           </h2>
 
           <p className="mt-1 text-sm text-slate-500">
-            {product.brand || "Store brand"}
+            {toTitleCase(product.category)}
+          </p>
+
+          <p className="mt-2 line-clamp-2 min-h-10 text-sm text-slate-500">
+            {product.description}
           </p>
 
           <div className="mt-4 flex items-center justify-between gap-3">
-            <span className="font-display text-lg font-bold text-slate-900">
-              ${product.price}
-            </span>
+            <div>
+              <span className="font-display text-lg font-bold text-slate-900">
+                {formatPrice(discountedPrice)}
+              </span>
+
+              {product.discountPercentage > 0 && (
+                <span className="ml-2 text-sm text-slate-400 line-through">
+                  {formatPrice(product.price)}
+                </span>
+              )}
+            </div>
 
             <span className="flex items-center gap-1 text-sm text-slate-600">
               <Star size={16} fill="currentColor" />
@@ -49,7 +68,7 @@ export default function ProductCard({ product, onAddToCart }) {
             event.stopPropagation()
             onAddToCart(product)
           }}
-          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800"
+          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800 active:scale-95"
         >
           <ShoppingCart size={18} />
           Add to cart

@@ -160,6 +160,11 @@ export default function ProductsPage() {
         </div>
       )}
 
+      <p className="mb-4 text-sm text-slate-500">
+  {sortedProducts.length} products
+  {search ? ` for "${search}"` : " found"}
+</p>
+
       <BackToTop />
     </div>
   )

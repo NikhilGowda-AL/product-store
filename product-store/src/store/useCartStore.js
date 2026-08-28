@@ -13,7 +13,10 @@ const useCartStore = create((set) => ({
         return {
           items: state.items.map((item) =>
             item.id === product.id
-              ? { ...item, quantity: item.quantity + 1 }
+              ? {
+                  ...item,
+                  quantity: item.quantity + 1
+                }
               : item
           )
         }
@@ -27,7 +30,8 @@ const useCartStore = create((set) => ({
             title: product.title,
             price: product.price,
             thumbnail: product.thumbnail,
-            quantity: 1
+            quantity: 1,
+            addedAt: Date.now()
           }
         ]
       }
@@ -42,7 +46,10 @@ const useCartStore = create((set) => ({
     set((state) => ({
       items: state.items.map((item) =>
         item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
+          ? {
+              ...item,
+              quantity: item.quantity + 1
+            }
           : item
       )
     })),

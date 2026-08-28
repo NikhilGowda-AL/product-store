@@ -14,13 +14,13 @@ export default function FilterBar({
           value={search}
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="Search products"
-          className="min-h-11 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 placeholder:text-slate-400"
+          className="min-h-11 rounded-lg border border-slate-300 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
 
         <select
           value={category}
           onChange={(event) => onCategoryChange(event.target.value)}
-          className="min-h-11 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900"
+          className="min-h-11 rounded-lg border border-slate-300 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
           <option value="">All categories</option>
 
@@ -34,7 +34,7 @@ export default function FilterBar({
         <select
           value={sort}
           onChange={(event) => onSortChange(event.target.value)}
-          className="min-h-11 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900"
+          className="min-h-11 rounded-lg border border-slate-300 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
           <option value="">Sort products</option>
           <option value="price-asc">Price low to high</option>
