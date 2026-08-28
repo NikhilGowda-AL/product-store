@@ -1,17 +1,31 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes
+} from "react-router-dom"
 import RootLayout from "./layouts/RootLayout"
+import AdminLayout from "./layouts/AdminLayout"
 import ProductsPage from "./pages/ProductsPage"
 import ProductDetailPage from "./pages/ProductDetailPage"
 import CartPage from "./pages/CartPage"
 import AdminPage from "./pages/AdminPage"
+import AnalyticsPage from "./pages/AnalyticsPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import useAuthStore from "./store/useAuthStore"
 
 function RequireAdmin({ children }) {
-  const isAdmin = useAuthStore((state) => state.isAdmin)
+  const isAdmin = useAuthStore(
+    (state) => state.isAdmin
+  )
 
   if (!isAdmin) {
-    return <Navigate to="/products" replace />
+    return (
+      <Navigate
+        to="/products"
+        replace
+      />
+    )
   }
 
   return children
@@ -24,7 +38,12 @@ export default function App() {
         <Route element={<RootLayout />}>
           <Route
             path="/"
-            element={<Navigate to="/products" replace />}
+            element={
+              <Navigate
+                to="/products"
+                replace
+              />
+            }
           />
 
           <Route
@@ -34,7 +53,9 @@ export default function App() {
 
           <Route
             path="/products/:id"
-            element={<ProductDetailPage />}
+            element={
+              <ProductDetailPage />
+            }
           />
 
           <Route
@@ -46,10 +67,20 @@ export default function App() {
             path="/admin"
             element={
               <RequireAdmin>
-                <AdminPage />
+                <AdminLayout />
               </RequireAdmin>
             }
-          />
+          >
+            <Route
+              index
+              element={<AdminPage />}
+            />
+
+            <Route
+              path="analytics"
+              element={<AnalyticsPage />}
+            />
+          </Route>
 
           <Route
             path="*"
