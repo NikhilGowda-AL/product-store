@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply font-body bg-slate-50 text-slate-800;
+  @apply bg-slate-50 font-body text-slate-800;
 }
 
 button,
